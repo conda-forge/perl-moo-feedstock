@@ -1,17 +1,17 @@
 {% set name = "perl-moo" %}
-{% set version = "2.005004" %}
-{% set sha256 = "e3030b80bd554a66f6b3c27fd53b1b5909d12af05c4c11ece9a58f8d1e478928" %}
+{% set version = "2.005005" %}
+{% set sha256 = "fb5a2952649faed07373f220b78004a9c6aba387739133740c1770e9b1f4b108" %}
 
 package:
   name: {{ name }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Moo-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  skip: true   # [win]
+  noarch: generic
   number: 0
   run_exports:
     weak:
@@ -27,6 +27,9 @@ requirements:
     - perl-sub-quote
   run:
     - perl
+    - perl-sub-quote
+    - perl-class-method-modifiers
+    - perl-role-tiny
 
 test:
   imports:
@@ -43,9 +46,7 @@ test:
 about:
   home: http://metacpan.org/pod/Moo
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
-  license_file:
-    - {{ environ["PREFIX"] }}/man/man1/perlartistic.1
-    - {{ environ["PREFIX"] }}/man/man1/perlgpl.1
+  license_file: LICENSE
   summary: 'Minimalist Object Orientation (with Moose compatibility)'
 
 extra:
